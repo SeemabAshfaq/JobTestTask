@@ -84,7 +84,7 @@ import 'package:shimmer/shimmer.dart';
                               favController.toggleFavorite(product!);
                             },
                             child:   
-                            SvgPicture.asset(favController.isFavorite(product!)?"assets/icons/fav2.svg":"assets/icons/heart.svg",width: 27.w,height: 22.h,)
+                            SvgPicture.asset(favController.isFavorite(product!)?"assets/icons/heart.svg":"assets/icons/fav2.svg",width: 27.w,height: 22.h,)
                           
                             
                            

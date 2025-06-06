@@ -149,9 +149,16 @@ class _FavouritesViewState extends State<FavouritesView> {
                 ),
                     
                 // Heart icon
-               SvgPicture.asset("assets/icons/heart.svg",
-               height: 16.h,
-               width: 16.w,)
+                                            Obx(() => GestureDetector(
+                            onTap: (){
+                              favController.toggleFavorite(product);
+                            },
+                            child:   
+                            SvgPicture.asset(favController.isFavorite(product)?"assets/icons/heart.svg":"assets/icons/fav2.svg",width: 16.w,height: 16.h,)
+                          
+                            
+                           
+                          ),)
                 
               ],
             ),
