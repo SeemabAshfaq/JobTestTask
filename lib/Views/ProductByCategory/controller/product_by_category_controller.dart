@@ -1,8 +1,8 @@
 import 'dart:convert';
+
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:seemab_test_task/Models/product_model.dart';
-import 'package:seemab_test_task/Views/ProductDetails/view/product_details.dart';
 
 class ProductByCategoryController extends GetxController {
     var productsOfCategoryList = <ProductModel>[].obs;
