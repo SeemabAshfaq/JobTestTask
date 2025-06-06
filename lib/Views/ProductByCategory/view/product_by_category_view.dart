@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:seemab_test_task/Constants/colors.dart';
 import 'package:seemab_test_task/Models/category_model.dart';
+import 'package:seemab_test_task/Views/ProductByCategory/controller/Product_by_category_controller.dart';
 import 'package:seemab_test_task/Views/Products/controller/product_controller.dart';
 import 'package:seemab_test_task/Widgets/custom_app_bar.dart';
 import 'package:seemab_test_task/Widgets/custom_search_field.dart';
@@ -21,12 +22,13 @@ class ProductByCategoryView extends StatefulWidget {
 }
 
 class _ProductByCategoryViewState extends State<ProductByCategoryView> {
-final ProductController productController = Get.put(ProductController());
+final ProductController productController = Get.find<ProductController>();
+final ProductByCategoryController productByCategoryController = Get.put(ProductByCategoryController());
  @override
   void initState() {
     
     super.initState();
-    productController.loadProductsOfCategory(widget.category.name.toLowerCase());
+    productByCategoryController.loadProductsOfCategory(widget.category.name.toLowerCase());
   }
 
   @override
@@ -35,10 +37,10 @@ final ProductController productController = Get.put(ProductController());
       backgroundColor: whiteColor,
       appBar:  CustomAppBar(title: widget.category.name,showBackIcon: true,),
       body: Obx((){
-        if(productController.isLoading.value){
+        if(productByCategoryController.isLoading.value||productController.isLoading.value){
   return productScreenShimmer();
 }
-              else if (productController.filteredCategoryList.isEmpty) {
+              else if (productByCategoryController.filteredCategoryList.isEmpty) {
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -64,14 +66,14 @@ final ProductController productController = Get.put(ProductController());
         child: Column(
           children: [
             CustomSearchField(
-              onChanged: (value) => productController.searchQuery.value = value,
+              onChanged: (value) => productByCategoryController.searchQuery.value = value,
             ),
              SizedBox(height: 12.h),
             Padding(
                 padding:  EdgeInsets.symmetric(horizontal: 10.w),
               child: Obx(() => Align(
                     alignment: Alignment.centerLeft,
-                    child: Text("${productController.filteredCategoryList.length} results found",
+                    child: Text("${productByCategoryController.filteredCategoryList.length} results found",
                     style: GoogleFonts.poppins(
                       fontSize: 10.sp,
                       fontWeight: FontWeight.w400,
@@ -83,14 +85,14 @@ final ProductController productController = Get.put(ProductController());
             Expanded(
               child: ListView.builder(
                 physics: BouncingScrollPhysics(),
-                    itemCount: productController.filteredCategoryList.length,
+                    itemCount: productByCategoryController.filteredCategoryList.length,
                     itemBuilder: (context, index) {
-                      final product = productController.filteredCategoryList[index];
+                      final product = productByCategoryController.filteredCategoryList[index];
                       return Padding(
-                        padding:  EdgeInsets.only(bottom: index==productController.filteredCategoryList.length-1?40.h:20),
+                        padding:  EdgeInsets.only(bottom: index==productByCategoryController.filteredCategoryList.length-1?40.h:20),
                         child: GestureDetector(
                           onTap: (){
-                            productController.fetchProduct(product.id);
+                            productController.fetchProductDetails(product.id);
                           },
                           child: ProductCard(product: product)),
                       );   },

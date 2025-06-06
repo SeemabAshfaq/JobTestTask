@@ -21,7 +21,7 @@ class CategoriesView extends StatefulWidget {
 }
 
 class _CategoriesViewState extends State<CategoriesView> {
-  final CategoryController controller = Get.put(CategoryController());
+  final CategoryController controller = Get.find<CategoryController>();
 
   @override
   Widget build(BuildContext context) {

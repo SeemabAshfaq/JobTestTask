@@ -43,7 +43,28 @@ import 'package:shimmer/shimmer.dart';
              SizedBox(
               //color: yellowColor,
                height: 209.h,width: double.infinity,
-              child: Image.network(product!.images.first, fit:BoxFit.cover,)),
+              child: Image.network(product!.images.first, fit:BoxFit.cover,
+               loadingBuilder: (context, child, loadingProgress) {
+    if (loadingProgress == null) return child;
+    return Shimmer.fromColors(
+          baseColor: Colors.grey.shade300,
+          highlightColor: Colors.grey.shade100,
+      child: Container(
+          height: 209.h,
+        width: double.infinity,
+        color: Colors.grey.shade200,
+        //child: Center(child: CircularProgressIndicator(strokeWidth: 2)),
+      ),
+    );
+  },
+  errorBuilder: (context, error, stackTrace) {
+    return Container(
+      width: double.infinity,
+      height: 209.h,
+      color: Colors.grey.shade200,
+      child: Icon(Icons.broken_image, size: 30.sp, color: Colors.grey),
+    );
+  },)),
                SizedBox(height: 16.h),
               
              Padding(
@@ -223,6 +244,27 @@ import 'package:shimmer/shimmer.dart';
         product!.images[imageIndex],
         height: 109.h,
         fit: BoxFit.cover,
+         loadingBuilder: (context, child, loadingProgress) {
+    if (loadingProgress == null) return child;
+    return Shimmer.fromColors(
+          baseColor: Colors.grey.shade300,
+          highlightColor: Colors.grey.shade100,
+      child: Container(
+          height: 109.h,
+        width: double.infinity,
+        color: Colors.grey.shade200,
+        //child: Center(child: CircularProgressIndicator(strokeWidth: 2)),
+      ),
+    );
+  },
+  errorBuilder: (context, error, stackTrace) {
+    return Container(
+      width: double.infinity,
+      height: 109.h,
+      color: Colors.grey.shade200,
+      child: Icon(Icons.broken_image, size: 30.sp, color: Colors.grey),
+    );
+  },
       ),
     );
   },

@@ -19,7 +19,7 @@ class ProductScreen extends StatefulWidget {
 }
 
 class _ProductScreenState extends State<ProductScreen> {
-  final ProductController controller = Get.put(ProductController());
+  final ProductController controller = Get.find<ProductController>();
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +82,7 @@ class _ProductScreenState extends State<ProductScreen> {
                         padding:  EdgeInsets.only(bottom: index==controller.filteredList.length-1?40.h:20),
                         child: GestureDetector(
                           onTap: (){
-                            controller.fetchProduct(product.id);
+                            controller.fetchProductDetails(product.id);
                           },
                           child: ProductCard(product: product)),
                       );   },
