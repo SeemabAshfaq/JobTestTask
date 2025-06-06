@@ -29,6 +29,7 @@ void fetchCategories() async {
       }
     } catch (e) {
       isLoading.value = false;
+      print("Excetion:${e.toString()}");
       Get.snackbar('Exception', e.toString());
     } finally {
       isLoading.value = false;
