@@ -3,6 +3,7 @@ import 'package:seemab_test_task/Models/product_model.dart';
 
 class FavoriteController extends GetxController {
   var favoriteProducts = <ProductModel>[].obs;
+    var searchQuery = ''.obs;
 
   bool isFavorite(ProductModel product) =>
       favoriteProducts.any((p) => p.id == product.id);
@@ -14,4 +15,9 @@ class FavoriteController extends GetxController {
       favoriteProducts.add(product);
     }
   }
+
+  
+    List<ProductModel> get filteredList => favoriteProducts
+      .where((p) => p.title.toLowerCase().contains(searchQuery.value.toLowerCase()))
+      .toList();
 }

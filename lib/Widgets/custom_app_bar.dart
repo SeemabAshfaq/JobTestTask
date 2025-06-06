@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:seemab_test_task/Constants/colors.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final bool? showBackIcon;
-  const CustomAppBar({Key? key, required this.title, this.showBackIcon,}) : super(key: key);
+  const CustomAppBar({super.key, required this.title, this.showBackIcon,});
 
   @override
   Widget build(BuildContext context) {

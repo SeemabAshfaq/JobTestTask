@@ -44,6 +44,7 @@ class SplashScreen extends StatelessWidget {
               ),
               SizedBox(height: 15.h,),
               Text("Hos ass kan du baka tid has nastan alla Sveriges salonger och motagningar. Baka frisor, massage, skonhetsbehandingar, friskvard och mycket mer.",
+              textAlign: TextAlign.center,
               style:GoogleFonts.poppins(
                 fontSize: 12.sp,
                 fontWeight: FontWeight.w400,

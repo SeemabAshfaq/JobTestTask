@@ -1,9 +1,19 @@
-import 'package:seemab_test_task/Models/product_model.dart';
-
 class CategoryModel {
-  final String title;
-  final String image;
-  final List<ProductModel> productsList;
+  final String slug;
+  final String name;
+  final String url;
 
-  CategoryModel({required this.title, required this.image,required this.productsList});
+  CategoryModel({
+    required this.slug,
+    required this.name,
+    required this.url,
+  });
+
+  factory CategoryModel.fromJson(Map<String, dynamic> json) {
+    return CategoryModel(
+      slug: json['slug'],
+      name: json['name'],
+      url: json['url'],
+    );
+  }
 }

@@ -6,7 +6,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:seemab_test_task/Constants/colors.dart';
 import 'package:seemab_test_task/Views/BotomNavBar/controller/nav_bar_cntroller.dart';
 import 'package:seemab_test_task/Views/Categories/view/categories_view.dart';
+import 'package:seemab_test_task/Views/Favourites/view/favourite_screen.dart';
 import 'package:seemab_test_task/Views/Products/view/product_screen.dart';
+import 'package:seemab_test_task/Views/UserProfile/controller/user_controller.dart';
+import 'package:seemab_test_task/Views/UserProfile/view/user_profile_view.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key});
@@ -19,11 +22,11 @@ class _BottomNavBarState extends State<BottomNavBar> {
   final List<Widget> _pages = [
     ProductScreen(),
     CategoriesView(),
-     SizedBox(),
-      SizedBox(),
+     FavouritesView(),
+      UserProfleScreen(),
   ];
 
-  final List<String> _labels = ["Products", "Categories", "Favourites", "Seemab"];
+  final List<String> _labels = ["Products", "Categories", "Favourites",""];
   final List<String> _icons = [
     "assets/icons/products.svg",
     "assets/icons/categories.svg",
@@ -31,7 +34,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
     "assets/icons/profile.svg",
   ];
   var controller = Get.find<BottomNavController>();
-
+    final UserController userController = Get.find<UserController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,7 +96,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
               ),
               SizedBox(height:8.h),
               Text(
-                      label,
+                     index==3?userController.user.value.name: label,
                       style: GoogleFonts.poppins(
                         fontSize: 10.sp,
                         fontWeight: FontWeight.w400,

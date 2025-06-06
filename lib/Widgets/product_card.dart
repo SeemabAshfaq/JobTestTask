@@ -4,11 +4,12 @@ import 'package:flutter_rating/flutter_rating.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:seemab_test_task/Constants/colors.dart';
 import 'package:seemab_test_task/Models/product_model.dart';
+import 'package:shimmer/shimmer.dart';
 
 class ProductCard extends StatelessWidget {
   final ProductModel product;
 
-  const ProductCard({Key? key, required this.product}) : super(key: key);
+  const ProductCard({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class ProductCard extends StatelessWidget {
           bottomRight: Radius.circular(5.r),
         ),
         side: BorderSide(
-          color: lightBlackColor2.withAlpha(13),
+          color: lightBlackColor2.withValues(alpha: 0.05),
           width: 1,
         ),
       ),
@@ -29,12 +30,34 @@ class ProductCard extends StatelessWidget {
         children: [
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 18.w),
-            child: Image.asset(
-              product.images[0],
-              height: 172.77.h,
-              width: double.infinity,
-              fit: BoxFit.cover,
-            ),
+            child: Image.network(
+  product.images[0],
+  height: 172.77.h,
+  width: double.infinity,
+  fit: BoxFit.cover,
+  loadingBuilder: (context, child, loadingProgress) {
+    if (loadingProgress == null) return child;
+    return Shimmer.fromColors(
+          baseColor: Colors.grey.shade300,
+          highlightColor: Colors.grey.shade100,
+      child: Container(
+        height: 172.77.h,
+        width: double.infinity,
+        color: Colors.grey.shade200,
+        //child: Center(child: CircularProgressIndicator(strokeWidth: 2)),
+      ),
+    );
+  },
+  errorBuilder: (context, error, stackTrace) {
+    return Container(
+      width: double.infinity,
+      height: 172.77.h,
+      color: Colors.grey.shade200,
+      child: Icon(Icons.broken_image, size: 30.sp, color: Colors.grey),
+    );
+  },
+)
+
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 25.h),
@@ -42,14 +65,18 @@ class ProductCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      product.title,
-                      style: GoogleFonts.poppins(
-                        fontWeight: FontWeight.w800,
-                        fontSize: 14.sp,
-                        color: lightBlackColor2,
+                    Flexible(
+                      child: Text(
+                        maxLines: null,
+                        product.title,
+                        style: GoogleFonts.poppins(
+                          fontWeight: FontWeight.w800,
+                          fontSize: 14.sp,
+                          color: lightBlackColor2,
+                        ),
                       ),
                     ),
                     Text(

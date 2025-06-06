@@ -7,10 +7,10 @@ class CustomSearchField extends StatelessWidget {
   final ValueChanged<String>? onChanged;
   final TextEditingController? controller;
   const CustomSearchField({
-    Key? key,
+    super.key,
     this.onChanged,
     this.controller,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
